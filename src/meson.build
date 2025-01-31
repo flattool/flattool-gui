@@ -81,6 +81,8 @@ configure_file(
 warehouse_sources = [
   'main.py',
   'host_info.py',
+  'flatpak_manager.py',
+  'custom_libflatpak_types.py',
   'gtk/error_toast.py',
   'gtk/sidebar_button.py',
   'gtk/loading_status.py',

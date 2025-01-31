@@ -17,7 +17,7 @@ class AddedPackage:
 			and self.branch == other.branch
 			and self.version == other.version
 			and self.remote == other.remote
-			and self.installation == other.installation
+			and self.installation == other.real_installation
 		)
 
 	def is_similar(self, other):

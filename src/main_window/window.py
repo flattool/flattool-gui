@@ -66,7 +66,7 @@ class WarehouseWindow(Adw.ApplicationWindow):
 	def do_refresh(self):
 		self.start_loading()
 		self.refresh_button.set_sensitive(False)
-		HostInfo.get_flatpaks(callback=self.end_loading)
+		HostInfo.setup(callback=self.end_loading)
 
 	def refresh_handler(self, *args):
 		if len(self.refresh_lockouts) == 0:
@@ -251,4 +251,4 @@ class WarehouseWindow(Adw.ApplicationWindow):
 
 		# Apply again
 		self.start_loading()
-		HostInfo.get_flatpaks(callback=self.end_loading)
+		HostInfo.setup(callback=self.end_loading)

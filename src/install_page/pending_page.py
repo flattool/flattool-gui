@@ -58,14 +58,14 @@ class PendingPage(Adw.NavigationPage):
 	def add_package_row(self, row):
 		self.added_packages.append(row.package)
 		row.set_state(ResultRow.PackageState.SELECTED)
-		key = f"{row.package.remote}<>{row.package.installation}"
+		key = f"{row.package.remote}<>{row.package.real_installation}"
 		added_row = ResultRow(row.package, ResultRow.PackageState.ADDED, row.origin_list_box)
 		group = None
 		try:
 			group = self.groups[key]
 			group.add_row(added_row)
 		except KeyError:
-			group = AddedGroup(added_row.package.remote, added_row.package.installation)
+			group = AddedGroup(added_row.package.remote, added_row.package.real_installation)
 			group.add_row(added_row)
 			self.groups[key] = group
 			self.preferences_page.add(group)
@@ -85,7 +85,7 @@ class PendingPage(Adw.NavigationPage):
 			self.added_packages.remove(row.package)
 
 		if len(group.rows) == 0:
-			key = f"{row.package.remote}<>{row.package.installation}"
+			key = f"{row.package.remote}<>{row.package.real_installation}"
 			self.groups.pop(key, None)
 			self.preferences_page.remove(group)
 
@@ -100,7 +100,7 @@ class PendingPage(Adw.NavigationPage):
 		for key, group in self.groups.items():
 			item = {
 				"remote": group.remote.name,
-				"installation": group.installation,
+				"installation": group.real_installation,
 				"package_names": [],
 				"extra_flags": [],
 			}

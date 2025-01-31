@@ -147,7 +147,7 @@ class RemotesPage(Adw.NavigationPage):
 	def filter_remote(self, row):
 		self.filter_setting.set_boolean("show-apps", True)
 		self.filter_setting.set_boolean("show-runtimes", True)
-		self.filter_setting.set_string("remotes-list", f"{row.remote.name}<>{row.installation};")
+		self.filter_setting.set_string("remotes-list", f"{row.remote.name}<>{row.real_installation};")
 		self.filter_setting.reset("runtimes-list")
 		packages_page = self.main_window.pages[self.main_window.packages_row]
 		packages_page.filters_page.generate_filters()
@@ -159,7 +159,7 @@ class RemotesPage(Adw.NavigationPage):
 		error = [None]
 
 		def thread(*args):
-			install = row.installation
+			install = row.real_installation
 			cmd = ["flatpak-spawn", "--host", "flatpak", "remote-delete", row.remote.name, "--force"]
 			if install == "user" or install == "system":
 				cmd.append(f"--{install}")

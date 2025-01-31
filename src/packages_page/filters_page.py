@@ -79,9 +79,9 @@ class FiltersPage(Adw.NavigationPage):
 		for row in self.remote_rows:
 			row.set_visible(state)
 			if state and row.check_button.get_active():
-				self.remotes_string += f"{row.item.name}<>{row.installation};"
+				self.remotes_string += f"{row.item.name}<>{row.real_installation};"
 			elif state:
-				self.remotes_string.replace(f"{row.item.name}<>{row.installation};", "")
+				self.remotes_string.replace(f"{row.item.name}<>{row.real_installation};", "")
 
 		self.update_gsettings()
 
@@ -101,9 +101,9 @@ class FiltersPage(Adw.NavigationPage):
 
 	def remote_row_check_handler(self, row):
 		if row.check_button.get_active():
-			self.remotes_string += f"{row.item.name}<>{row.installation};"
+			self.remotes_string += f"{row.item.name}<>{row.real_installation};"
 		else:
-			self.remotes_string = self.remotes_string.replace(f"{row.item.name}<>{row.installation};", "")
+			self.remotes_string = self.remotes_string.replace(f"{row.item.name}<>{row.real_installation};", "")
 		self.update_gsettings()
 
 	def runtime_row_check_handler(self, row):
